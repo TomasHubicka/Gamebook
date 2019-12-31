@@ -13,5 +13,6 @@ namespace Gamebook.Models
         public string login { get; set; }
         public string password { get; set; }
         public string achievements { get; set; }
+        public int sessionId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Gamebook.Migrations
 {
@@ -11,7 +12,7 @@ namespace Gamebook.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     text1 = table.Column<string>(nullable: true),
                     text2 = table.Column<string>(nullable: true)
                 },
@@ -25,10 +26,11 @@ namespace Gamebook.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     login = table.Column<string>(nullable: true),
                     password = table.Column<string>(nullable: true),
-                    achievements = table.Column<string>(nullable: true)
+                    achievements = table.Column<string>(nullable: true),
+                    sessionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,8 +44,8 @@ namespace Gamebook.Migrations
 
             migrationBuilder.InsertData(
                 table: "users",
-                columns: new[] { "Id", "achievements", "login", "password" },
-                values: new object[] { 1, "0,0,0,0,0,0,0,0,0,0,0,0", "bewb", "pusspuss" });
+                columns: new[] { "Id", "achievements", "login", "password", "sessionId" },
+                values: new object[] { 1, "0,0,0,0,0,0,0,0,0,0,0,0", "bewb", "pusspuss", 0 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

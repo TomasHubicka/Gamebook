@@ -2,25 +2,29 @@
 using Gamebook.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gamebook.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20191229175124_Init")]
+    [Migration("20191230182331_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Gamebook.Models.RoomText", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("text1");
 
@@ -42,13 +46,16 @@ namespace Gamebook.Migrations
             modelBuilder.Entity("Gamebook.Models.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("achievements");
 
                     b.Property<string>("login");
 
                     b.Property<string>("password");
+
+                    b.Property<int>("sessionId");
 
                     b.HasKey("Id");
 
@@ -60,7 +67,8 @@ namespace Gamebook.Migrations
                             Id = 1,
                             achievements = "0,0,0,0,0,0,0,0,0,0,0,0",
                             login = "bewb",
-                            password = "pusspuss"
+                            password = "pusspuss",
+                            sessionId = 0
                         });
                 });
 #pragma warning restore 612, 618
