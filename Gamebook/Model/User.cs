@@ -10,7 +10,11 @@ namespace Gamebook.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
+        [Display(Name = "login")]
         public string login { get; set; }
+        [Required]
+        [Display(Name ="password")]
         public string password { get; set; }
         public string achievements { get; set; }
         public int sessionId { get; set; }

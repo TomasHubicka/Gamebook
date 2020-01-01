@@ -1,10 +1,13 @@
 ﻿@page
-@model Gamebook.Pages.RegistrationModel
+@model Gamebook.Pages.loginModel
 @{
-    ViewData["Title"] = "Registration";
+    ViewData["Title"] = "login";
 }
 
-<h1>Registration</h1>
+<h1>login</h1>
+@if(Model.Error == 1) { 
+<p style="background-color: darkred; color: black"> Wrong login or password. </p>
+}
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -20,7 +23,7 @@
                 <span asp-validation-for="user.password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-primary" />
+                <input type="submit" value="Login" class="btn btn-primary" />
             </div>
         </form>
     </div>

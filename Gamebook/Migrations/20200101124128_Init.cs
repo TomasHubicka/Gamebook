@@ -40,7 +40,14 @@ namespace Gamebook.Migrations
             migrationBuilder.InsertData(
                 table: "roomTexts",
                 columns: new[] { "Id", "text1", "text2" },
-                values: new object[] { 1, "txt", "ryr" });
+                values: new object[,]
+                {
+                    { 1, "one", "1" },
+                    { 2, "two", "2" },
+                    { 3, "three", "3" },
+                    { 4, "four", "4" },
+                    { 5, "five", "5" }
+                });
 
             migrationBuilder.InsertData(
                 table: "users",

@@ -6,77 +6,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="obj\Debug\netcoreapp2.2\Gamebook.AssemblyInfo.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.2\Gamebook.RazorAssemblyInfo.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.2\Gamebook.RazorTargetAssemblyInfo.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.2\Razor\Pages\Error.g.cshtml.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.2\Razor\Pages\Index.g.cshtml.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.2\Razor\Pages\Privacy.g.cshtml.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.2\Razor\Pages\Shared\_CookieConsentPartial.g.cshtml.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.2\Razor\Pages\Shared\_Layout.g.cshtml.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.2\Razor\Pages\Shared\_ValidationScriptsPartial.g.cshtml.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.2\Razor\Pages\_ViewImports.g.cshtml.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.2\Razor\Pages\_ViewStart.g.cshtml.cs" />
-    <Compile Include="obj\Release\netcoreapp2.2\Gamebook.AssemblyInfo.cs" />
-    <Compile Include="obj\Release\netcoreapp2.2\Gamebook.RazorAssemblyInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="bin\Debug\netcoreapp2.2\Gamebook.deps.json" />
-    <Content Include="bin\Debug\netcoreapp2.2\Gamebook.runtimeconfig.dev.json" />
-    <Content Include="bin\Debug\netcoreapp2.2\Gamebook.runtimeconfig.json" />
-    <Content Include="obj\Debug\netcoreapp2.2\Gamebook.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Gamebook.csproj.nuget.dgspec.json" />
-    <Content Include="obj\project.assets.json" />
+    <Compile Remove="Migrations\20200101123658_stuff.cs" />
+    <Compile Remove="Migrations\20200101123658_stuff.Designer.cs" />
+    <Compile Remove="Migrations\20200101123738_stuff2.cs" />
+    <Compile Remove="Migrations\20200101123738_stuff2.Designer.cs" />
+    <Compile Remove="Migrations\20200101124236_morestuff.cs" />
+    <Compile Remove="Migrations\20200101124236_morestuff.Designer.cs" />
   </ItemGroup>
 
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="bin\Release\netcoreapp2.2\" />
-    <Folder Include="PageModel\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <None Include="bin\Debug\netcoreapp2.2\Gamebook.dll" />
-    <None Include="bin\Debug\netcoreapp2.2\Gamebook.pdb" />
-    <None Include="bin\Debug\netcoreapp2.2\Gamebook.Views.dll" />
-    <None Include="bin\Debug\netcoreapp2.2\Gamebook.Views.pdb" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.AssemblyInfoInputs.cache" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.assets.cache" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.csproj.CopyComplete" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.csprojAssemblyReference.cache" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.dll" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.pdb" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.RazorAssemblyInfo.cache" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.RazorCoreGenerate.cache" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.RazorTargetAssemblyInfo.cache" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.TagHelpers.input.cache" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.TagHelpers.output.cache" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.Views.dll" />
-    <None Include="obj\Debug\netcoreapp2.2\Gamebook.Views.pdb" />
-    <None Include="obj\Gamebook.csproj.nuget.cache" />
-    <None Include="obj\Gamebook.csproj.nuget.g.props" />
-    <None Include="obj\Gamebook.csproj.nuget.g.targets" />
-    <None Include="obj\Release\netcoreapp2.2\Gamebook.AssemblyInfoInputs.cache" />
-    <None Include="obj\Release\netcoreapp2.2\Gamebook.assets.cache" />
-    <None Include="obj\Release\netcoreapp2.2\Gamebook.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Release\netcoreapp2.2\Gamebook.RazorAssemblyInfo.cache" />
   </ItemGroup>
 
 </Project>

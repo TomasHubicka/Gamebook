@@ -3,14 +3,16 @@ using Gamebook.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gamebook.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200101124128_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,12 +26,6 @@ namespace Gamebook.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("linktext1");
-
-                    b.Property<string>("linktext2");
-
-                    b.Property<string>("linktext3");
-
                     b.Property<string>("text1");
 
                     b.Property<string>("text2");
@@ -42,56 +38,32 @@ namespace Gamebook.Migrations
                         new
                         {
                             Id = 1,
-                            linktext1 = "left",
-                            linktext2 = "mid",
-                            linktext3 = "right",
                             text1 = "one",
                             text2 = "1"
                         },
                         new
                         {
                             Id = 2,
-                            linktext1 = "left",
-                            linktext2 = "mid",
-                            linktext3 = "right",
                             text1 = "two",
                             text2 = "2"
                         },
                         new
                         {
                             Id = 3,
-                            linktext1 = "left",
-                            linktext2 = "mid",
-                            linktext3 = "right",
                             text1 = "three",
                             text2 = "3"
                         },
                         new
                         {
                             Id = 4,
-                            linktext1 = "left",
-                            linktext2 = "mid",
-                            linktext3 = "right",
                             text1 = "four",
                             text2 = "4"
                         },
                         new
                         {
                             Id = 5,
-                            linktext1 = "left",
-                            linktext2 = "mid",
-                            linktext3 = "right",
                             text1 = "five",
                             text2 = "5"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            linktext1 = "left",
-                            linktext2 = "mid",
-                            linktext3 = "right",
-                            text1 = "six",
-                            text2 = "6"
                         });
                 });
 

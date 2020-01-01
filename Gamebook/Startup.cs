@@ -29,7 +29,6 @@ namespace Gamebook
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".Gamebook.Session";
-                options.IdleTimeout = TimeSpan.FromSeconds(3600); //change later
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });

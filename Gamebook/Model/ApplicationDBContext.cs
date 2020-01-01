@@ -16,7 +16,12 @@ namespace Gamebook.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().HasData(new User { Id = 1, login = "bewb", password = "pusspuss", achievements = "0,0,0,0,0,0,0,0,0,0,0,0" });
-            modelBuilder.Entity<RoomText>().HasData(new RoomText { Id = 1, text1 = "txt", text2 = "ryr" });
+            modelBuilder.Entity<RoomText>().HasData(new RoomText { Id = 1, text1 = "one", text2 = "1", linktext1 = "left", linktext2 = "mid", linktext3="right" });
+            modelBuilder.Entity<RoomText>().HasData(new RoomText { Id = 2, text1 = "two", text2 = "2", linktext1 = "left", linktext2 = "mid", linktext3 = "right" });
+            modelBuilder.Entity<RoomText>().HasData(new RoomText { Id = 3, text1 = "three", text2 = "3", linktext1 = "left", linktext2 = "mid", linktext3 = "right" });
+            modelBuilder.Entity<RoomText>().HasData(new RoomText { Id = 4, text1 = "four", text2 = "4", linktext1 = "left", linktext2 = "mid", linktext3 = "right" });
+            modelBuilder.Entity<RoomText>().HasData(new RoomText { Id = 5, text1 = "five", text2 = "5", linktext1 = "left", linktext2 = "mid", linktext3 = "right" });
+            modelBuilder.Entity<RoomText>().HasData(new RoomText { Id = 6, text1 = "six", text2 = "6", linktext1 = "left", linktext2 = "mid", linktext3 = "right" });
         }
     }
 }

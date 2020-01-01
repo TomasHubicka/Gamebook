@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gamebook.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20191230182331_Init")]
-    partial class Init
+    [Migration("20200101124416_data_added")]
+    partial class data_added
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -38,8 +38,38 @@ namespace Gamebook.Migrations
                         new
                         {
                             Id = 1,
-                            text1 = "txt",
-                            text2 = "ryr"
+                            text1 = "one",
+                            text2 = "1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            text1 = "two",
+                            text2 = "2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            text1 = "three",
+                            text2 = "3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            text1 = "four",
+                            text2 = "4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            text1 = "five",
+                            text2 = "5"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            text1 = "six",
+                            text2 = "6"
                         });
                 });
 

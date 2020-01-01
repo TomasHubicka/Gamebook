@@ -8,3 +8,14 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<p>@Html.DisplayFor(m => m.roomTexts[Model.room].text1)</p><br />
+<p>@Html.DisplayFor(m => m.roomTexts[Model.room].text2)</p>
+<form asp-page-handler="One" method="post">
+    <button class="btn btn-default">one</button>
+</form>
+<form asp-page-handler="Two" method="post">
+    <button class="btn btn-default">two</button>
+</form>
+<a asp-page="login.cshtml">login</a><br />
+<a asp-page="register.cshtml">register</a>
