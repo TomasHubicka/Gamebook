@@ -13,38 +13,40 @@ namespace Gamebook.Pages
     {
         public const string SessionKeyId = "_User";
         public ApplicationDBContext _db = new ApplicationDBContext();
-        List<User> Users { get; set; }
+        List<User> Users = new List<User>();
+
         public void OnGet()
         {
-            Users = _db.users.ToList();
+                Users = _db.users.ToList();
+
         }
         [BindProperty]
         public User user { get; set; }
         public int Error { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
+            Users = _db.users.ToList();
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            int y = -1;
             foreach (var x in Users)
-            {
-                y = y + 1;
-                if (user.login == Users[y].login)
+            {              
+                if (user.login.ToString() == Users[x.Id-1].login.ToString())
                 {
-                    if(user.password == Users[y].password)
+                    if(user.password.ToString() == Users[x.Id-1].password.ToString())
                     {
-                        HttpContext.Session.SetInt32(SessionKeyId, y);
+                        HttpContext.Session.SetInt32(SessionKeyId, x.Id);
+                        return RedirectToPage("./Index");
                     }
                 }
                 else
                 {
-
+                    Error = 1;
+                    return null;
                 }
             }
-
-            return RedirectToPage("./Index");
+            return null;
         }
     }
 }

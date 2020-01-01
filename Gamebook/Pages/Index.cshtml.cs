@@ -13,19 +13,23 @@ namespace Gamebook.Pages
     {
 
         public ApplicationDBContext _db = new ApplicationDBContext();
-        public int room = 0;
+        public int room { get; set; } = 0;
         public List<RoomText> roomTexts { get; set; }
         public void OnGet()
         {
             roomTexts = _db.roomTexts.ToList();
         }
-        public void OnPostOne()
+        public Task<IActionResult> OnPostOne()
         {
+            roomTexts = _db.roomTexts.ToList();
             room = 1;
+            return null;
         }
-        public void OnPostTwo()
+        public Task<IActionResult> OnPostTwo()
         {
+            roomTexts = _db.roomTexts.ToList();
             room = 2;
+            return null;
         }
     }
 }
