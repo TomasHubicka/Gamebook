@@ -9,21 +9,8 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-<p>@Html.DisplayFor(m => m.roomTexts[Model.room].text1)</p><br />
-<p>@Html.DisplayFor(m => m.roomTexts[Model.room].text2)</p>
 
-
-@foreach (var x in Model.roomTexts)
-{
-    @Html.DisplayFor(m => m.roomTexts[x.Id-1].text1)
-}
-<form asp-page-handler="One" method="post">
-    <button class="btn btn-default">one</button>
-</form>
-<form asp-page-handler="Two" method="post">
-    <button class="btn btn-default">two</button>
-</form>
-<a asp-page="./login">login</a>
-<a asp-page="registration">registration</a>
-<button asp-route="./login.cshtml">login</button>
-<button asp-route="./registration.cshtml">register</button>
+<p>@Html.DisplayFor(m => m.Users[userId].login)  is logged in</p>
+@if ( ) { }
+<a asp-page="./login" class="btn btn-primary">login</a>
+<a asp-page="registration" class="btn btn-primary">registration</a>
