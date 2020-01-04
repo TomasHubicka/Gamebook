@@ -26,5 +26,14 @@ namespace Gamebook.Services
             return _db.users.FirstOrDefault(x => x.Id == Id);
         }
 
+        public void Update(User userChanges)
+        {
+            User user = _db.users.FirstOrDefault(x => x.Id == userChanges.Id);
+            if (user != null)
+            {
+                user.achievements = userChanges.achievements;
+                user.sessionId = userChanges.sessionId;
+            }
+        }
     }
 }

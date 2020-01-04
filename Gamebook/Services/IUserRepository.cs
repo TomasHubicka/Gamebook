@@ -11,5 +11,6 @@ namespace Gamebook.Model
         User GetUser(int Id);
         List<User> GetAllUsers();
         void Add(User user);
+        void Update(User userChanges);
     }
 }

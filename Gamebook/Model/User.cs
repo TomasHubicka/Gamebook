@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gamebook.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Gamebook.Models
         [Required]
         [Display(Name ="password")]
         public string password { get; set; }
-        public string achievements { get; set; }
+        public Achievements achievements { get; set; }
         public int sessionId { get; set; }
     }
 }

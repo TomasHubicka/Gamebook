@@ -1,0 +1,15 @@
+﻿@page
+@model Gamebook.Pages.achievementsModel
+@{
+    ViewData["Title"] = "achievements";
+}
+
+<h1>achievements</h1>
+@if (Model.achievements.win) 
+{
+    <p>Win: True</p>
+}
+else
+{
+    <p>Win: False</p>
+}

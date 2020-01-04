@@ -15,7 +15,7 @@ namespace Gamebook.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>().HasData(new User { Id = 1, login = "bewb", password = "pusspuss", achievements = "0,0,0,0,0,0,0,0,0,0,0,0" });
+            modelBuilder.Entity<User>().HasData(new User { Id = 1, login = "bewb", password = "pusspuss" });
             modelBuilder.Entity<RoomText>().HasData(new RoomText { Id = 1, text1 = "one", text2 = "1", linktext1 = "left", linktext2 = "mid", linktext3="right" });
             modelBuilder.Entity<RoomText>().HasData(new RoomText { Id = 2, text1 = "two", text2 = "2", linktext1 = "left", linktext2 = "mid", linktext3 = "right" });
             modelBuilder.Entity<RoomText>().HasData(new RoomText { Id = 3, text1 = "three", text2 = "3", linktext1 = "left", linktext2 = "mid", linktext3 = "right" });
