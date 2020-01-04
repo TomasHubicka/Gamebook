@@ -4,14 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gamebook.Models;
 using Gamebook.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
 namespace Gamebook.Pages
 {
-    public class IndexModel : PageModel
+    public class GameModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
         SessionStorage<User> _ss;
@@ -21,7 +20,7 @@ namespace Gamebook.Pages
         public List<RoomText> roomTexts { get; set; }
         public List<User> Users = new List<User>();
         public User CurrentUser { get; set; }
-        public IndexModel(ILogger<IndexModel> logger, SessionStorage<User> ss)
+        public GameModel(ILogger<IndexModel> logger, SessionStorage<User> ss)
         {
             _logger = logger;
             _ss = ss;
@@ -29,7 +28,21 @@ namespace Gamebook.Pages
         public void OnGet()
         {
             CurrentUser = _ss.LoadOrCreate("_User");
-            Users = _ur.GetAllUsers();
+            roomTexts = _rr.GetAllRooms();
+        }
+        public void OnGetOne()
+        {
+            CurrentUser = _ss.LoadOrCreate("_User");
+            roomTexts = _rr.GetAllRooms();
+        }
+        public void OnGetTwo()
+        {
+            CurrentUser = _ss.LoadOrCreate("_User");
+            roomTexts = _rr.GetAllRooms();
+        }
+        public void OnGetThree()
+        {
+            CurrentUser = _ss.LoadOrCreate("_User");
             roomTexts = _rr.GetAllRooms();
         }
     }

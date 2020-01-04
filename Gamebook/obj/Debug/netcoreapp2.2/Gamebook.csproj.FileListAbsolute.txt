@@ -30,3 +30,4 @@ C:\Users\Tomáš\source\repos\Gamebook\Gamebook\bin\Debug\netcoreapp2.2\Gamebook
 C:\Users\Tomáš\source\repos\Gamebook\Gamebook\obj\Debug\netcoreapp2.2\Gamebook.Views.pdb
 C:\Users\Tomáš\source\repos\Gamebook\Gamebook\obj\Debug\netcoreapp2.2\Gamebook.csproj.CopyComplete
 C:\Users\Tomáš\source\repos\Gamebook\Gamebook\obj\Debug\netcoreapp2.2\Razor\Pages\login.g.cshtml.cs
+C:\Users\Tomáš\source\repos\Gamebook\Gamebook\obj\Debug\netcoreapp2.2\Razor\Pages\Game.g.cshtml.cs

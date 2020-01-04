@@ -8,9 +8,13 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-
-
-<p>@Html.DisplayFor(m => m.Users[userId].login)  is logged in</p>
-@if ( ) { }
-<a asp-page="./login" class="btn btn-primary">login</a>
-<a asp-page="registration" class="btn btn-primary">registration</a>
+@if (Model.CurrentUser.login != null)
+{
+    <p>@Html.DisplayFor(m => m.CurrentUser.login) is logged in</p>
+    <a asp-page="game" class="btn btn-primary">Start Game</a>
+}
+else
+{
+    <a asp-page="./login" class="btn btn-primary">login</a>
+    <a asp-page="registration" class="btn btn-primary">registration</a>
+}
