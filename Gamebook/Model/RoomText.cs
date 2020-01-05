@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Gamebook.Models
 {
-    public class RoomText
+    public class RoomTexts
     {
         [Key]
         public int Id { get; set; }
-        public string text1 { get; set; }
-        public string text2 { get; set; }
+        public string text { get; set; }
         public string linktext1 { get; set; }
         public string linktext2 { get; set; }
         public string linktext3 { get; set; }

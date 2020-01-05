@@ -9,8 +9,7 @@ namespace Gamebook.Services
 {
     public class GameLogic
     {
-        RoomRepository _rr = new RoomRepository();
-        public bool Start(SessionStorage<GameState> _ss)
+        public bool Start(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w)
         {
             GameState empty = new GameState();
             empty.Start = 0;
@@ -26,64 +25,255 @@ namespace Gamebook.Services
             empty.KnifeInv = false;
             empty.FlashlightInv = false;
             _ss.Save("_Game", empty);
+            _cr.Save("_CurrentRoom", 1);
+            _w.Save("_Waiting", false);
             return true;
         }
-        public void Game(SessionStorage<GameState> _ss,SessionStorage<int> _cr, int Choice)
+        public void Run(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, int Choice)
         {
-            if(_ss.LoadOrCreate("_Game").PushPull == 1)
+            Game(_ss, _cr, _w, Choice);
+        }
+        public void Game(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, int Choice)
+        {
+            if(_ss.LoadOrCreate("_Game").Start == 1)
             {
-                //pull
-                _cr.Save("_CurrentRoom", 34);
+                //turn around and leave - end
+                _cr.Save("_CurrentRoom", 2);
             }
-            else if (_ss.LoadOrCreate("_Game").PushPull == 2)
+            else if (_ss.LoadOrCreate("_Game").Start == 2)
             {
-                //push
-                _cr.Save("_CurrentRoom", 33);
+                //Garage
+                _cr.Save("_CurrentRoom", 3);
+                if(_ss.LoadOrCreate("_Game").CrowbarYN == 1)
+                {
+                    //take crowbar
+                    GameState Game = _ss.LoadOrCreate("_Game");
+                    Game.CrowbarInv = true;
+                    _ss.Save("_Game", Game);
+                    _cr.Save("_CurrentRoom", 4);
+                    Game2(_ss, _cr, _w, Choice);
+                }
+                else if(_ss.LoadOrCreate("_Game").CrowbarYN == 2)
+                {
+                    //leave crowbar
+                    _cr.Save("_CurrentRoom", 5);
+                    Game2(_ss, _cr, _w, Choice);
+                }
+                else if (_w.LoadOrCreate("_Waiting") == true)
+                {
+                    GameState Game = _ss.LoadOrCreate("_Game");
+                    Game.CrowbarYN = Choice;
+                    _ss.Save("_Game", Game);
+                    _w.Save("_Waiting", false);
+                    Run(_ss, _cr, _w, Choice);
+                }
             }
-            else
+            else if (_ss.LoadOrCreate("_Game").Start == 3)
             {
+                //Hall
+                _cr.Save("_CurrentRoom", 6);
+                if(_ss.LoadOrCreate("_Game").KitchenHall2 == 1)
+                {
+                    //Kitchen
+                    _cr.Save("_CurrentRoom", 7);
+                    if(_ss.LoadOrCreate("_Game").KnifeYN == 1)
+                    {
+                        //take knife
+                        GameState Game = _ss.LoadOrCreate("_Game");
+                        Game.KnifeInv = true;
+                        _ss.Save("_Game", Game);
+                        _cr.Save("_CurrentRoom", 8);
+                        Game2(_ss, _cr, _w, Choice);
+                    }
+                    else if (_ss.LoadOrCreate("_Game").KnifeYN == 2)
+                    {
+                        //leave knife
+                        _cr.Save("_CurrentRoom", 9);
+                        Game2(_ss, _cr, _w, Choice);
+                    }
+                    else if(_w.LoadOrCreate("_Waiting") == true)
+                    {
+                        GameState Game = _ss.LoadOrCreate("_Game");
+                        Game.KnifeYN = Choice;
+                        _ss.Save("_Game", Game);
+                        _w.Save("_Waiting", false);
+                        Run(_ss, _cr, _w, Choice);
+                    }
+
+                }
+                else if (_ss.LoadOrCreate("_Game").KitchenHall2 == 2)
+                {
+                    //Hall 2
+                    _cr.Save("_CurrentRoom", 6);
+                    Game2(_ss, _cr, _w, Choice);
+                }
+                else if (_w.LoadOrCreate("_Waiting") == true)
+                {
+                    GameState Game = _ss.LoadOrCreate("_Game");
+                    Game.KitchenHall2 = Choice;
+                    _ss.Save("_Game", Game);
+                    _w.Save("_Waiting", false);
+                    Run(_ss, _cr, _w, Choice);
+                }
+            }
+            else if (_w.LoadOrCreate("_Waiting") == true)
+            {
+                GameState Game = _ss.LoadOrCreate("_Game");
+                Game.Start = Choice;
+                _ss.Save("_Game", Game);
+                _w.Save("_Waiting", false);
+                Run(_ss, _cr, _w, Choice);
+            }
+        }
+        public void Game2(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, int Choice)
+        {
+            if (_ss.LoadOrCreate("_Game").BedroomHall3 == 1)
+            {
+                //Bedroom - end
+                _cr.Save("_CurrentRoom", 11);
+            }
+            else if (_ss.LoadOrCreate("_Game").BedroomHall3 == 2)
+            {
+                //Hall3
+                _cr.Save("_CurrentRoom", 12);
+                if (_ss.LoadOrCreate("_Game").LivingRoomBasementWindow == 1)
+                {
+                    if (_ss.LoadOrCreate("_Game").CrowbarInv == true) { 
+                        //Living Room - has crowbar
+                        _cr.Save("_CurrentRoom", 13);
+                        if (_ss.LoadOrCreate("_Game").KeepCrowbarYN == 1)
+                        {
+                            //keep crowbar
+                            GameState Game = _ss.LoadOrCreate("_Game");
+                            Game.FlashlightInv = true;
+                            _ss.Save("_Game", Game);
+                            _cr.Save("_CurrentRoom", 14);
+                            Game3(_ss, _cr, _w, Choice);
+                        }
+                        else if (_ss.LoadOrCreate("_Game").KeepCrowbarYN == 2)
+                        {
+                            //leave crowbar
+                            GameState Game = _ss.LoadOrCreate("_Game");
+                            Game.CrowbarInv = false;
+                            Game.FlashlightInv = true;
+                            _ss.Save("_Game", Game);
+                            _cr.Save("_CurrentRoom", 15);
+                            Game3(_ss, _cr, _w, Choice);
+                        }
+                        else if (_w.LoadOrCreate("_Waiting") == true)
+                        {
+                            GameState Game = _ss.LoadOrCreate("_Game");
+                            Game.KeepCrowbarYN = Choice;
+                            _ss.Save("_Game", Game);
+                            _w.Save("_Waiting", false);
+                            Run(_ss, _cr, _w, Choice);
+                        }
+                    }
+                    else if (_ss.LoadOrCreate("_Game").CrowbarInv == false)
+                    {
+                        //doesn't have crowbar
+                        _cr.Save("_CurrentRoom", 16);
+                        GameState Game = _ss.LoadOrCreate("_Game");
+                        Game.LivingRoomBasementWindow = 2;
+                        _ss.Save("_Game", Game);
+                        Game3(_ss, _cr, _w, Choice);
+                    }
+                }
+                else if (_ss.LoadOrCreate("_Game").LivingRoomBasementWindow == 2)
+                {
+                    //Basement
+                    _cr.Save("_CurrentRoom", 17);
+                    Game3(_ss, _cr, _w, Choice);
+
+                }
+                else if (_ss.LoadOrCreate("_Game").LivingRoomBasementWindow == 3)
+                {
+                    //Window - end
+                    _cr.Save("_CurrentRoom", 18);
+                }
+                else if (_w.LoadOrCreate("_Waiting") == true)
+                {
+                    GameState Game = _ss.LoadOrCreate("_Game");
+                    Game.LivingRoomBasementWindow = Choice;
+                    _ss.Save("_Game", Game);
+                    _w.Save("_Waiting", false);
+                    Run(_ss, _cr, _w, Choice);
+                }
+            }
+            else if (_w.LoadOrCreate("_Waiting") == true)
+            {
+                GameState Game = _ss.LoadOrCreate("_Game");
+                Game.BedroomHall3 = Choice;
+                _ss.Save("_Game", Game);
+                _w.Save("_Waiting", false);
+                Run(_ss, _cr, _w, Choice);
+            }
+        }
+        public void Game3(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, int Choice)
+        {
+            if (_ss.LoadOrCreate("_Game").FlashlightInv == true)
+            {
+                _cr.Save("_CurrentRoom", 19);
+                //has flashlight
                 if (_ss.LoadOrCreate("_Game").RunFight == 1)
                 {
                     //run
-                    if(_ss.LoadOrCreate("_Game").CrowbarInv == true)
+                    if (_ss.LoadOrCreate("_Game").CrowbarInv == true)
                     {
-                        //has crowbar
-                        _cr.Save("_CurrentRoom", 27);
+                        //has crowbar - end
+                        _cr.Save("_CurrentRoom", 20);
                     }
-                    else
+                    else if(_ss.LoadOrCreate("_Game").CrowbarInv == false)
                     {
+                        _cr.Save("_CurrentRoom", 21);
                         //doesn't have crowbar
-                        _cr.Save("_CurrentRoom", 28);
+                        if (_ss.LoadOrCreate("_Game").PushPull == 1)
+                        {
+                            //push - end
+                            _cr.Save("_CurrentRoom", 22);
+                        }
+                        else if(_ss.LoadOrCreate("_Game").PushPull == 2)
+                        {
+                            //pull - win
+                            _cr.Save("_CurrentRoom", 23);
+                        }
+                        else if (_w.LoadOrCreate("_Waiting") == true)
+                        {
+                            GameState Game = _ss.LoadOrCreate("_Game");
+                            Game.PushPull = Choice;
+                            _ss.Save("_Game", Game);
+                            _w.Save("_Waiting", false);
+                            Run(_ss, _cr, _w, Choice);
+                        }
                     }
                 }
-                else if (_ss.LoadOrCreate("_Game").RunFight == 2)
+                else if(_ss.LoadOrCreate("_Game").RunFight == 2)
                 {
                     //fight
-                    if (_ss.LoadOrCreate("_Game").KnifeInv == true)
+                    if(_ss.LoadOrCreate("_Game").KnifeInv == true)
                     {
-                        //has knife
-                        _cr.Save("_CurrentRoom", 29);
+                        //has knife - end
+                        _cr.Save("_CurrentRoom", 24);
                     }
-                    else
+                    else if (_ss.LoadOrCreate("_Game").KnifeInv == false)
                     {
-                        //doesn't have knife
-                        _cr.Save("_CurrentRoom", 30);
+                        //doesn't have knife - end
+                        _cr.Save("_CurrentRoom", 25);
                     }
                 }
-                else
+                else if (_w.LoadOrCreate("_Waiting") == true)
                 {
-                    //going to basement
-                    if (_ss.LoadOrCreate("_Game").FlashlightInv == false)
-                    {
-                        //doesn't have flashlight
-                        _cr.Save("_CurrentRoom", 22);
-                    }
-                    else
-                    {
-                        //has flashlight
-                        if (_ss.LoadOrCreate("_Game").)
-                    }
+                    GameState Game = _ss.LoadOrCreate("_Game");
+                    Game.RunFight = Choice;
+                    _ss.Save("_Game", Game);
+                    _w.Save("_Waiting", false);
+                    Run(_ss, _cr, _w, Choice);
                 }
+            }
+            else if (_ss.LoadOrCreate("_Game").FlashlightInv == false)
+            {
+                //doesn't have flashlight - end
+                _cr.Save("_CurrentRoom", 26);
             }
         }
     }

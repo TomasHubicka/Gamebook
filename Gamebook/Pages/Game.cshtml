@@ -4,5 +4,35 @@
     ViewData["Title"] = "Game";
 }
 
-<h1>Game</h1>
 
+
+<div style="width: 80%; align-self:center;">
+    <h1 style="align-self:center;">Game</h1>
+    <p style="align-self:center;">@Html.DisplayFor(m => m.roomText.text)</p><br />
+    <div class="row">
+        @if (Model.roomText.linktext1 != "")
+        {
+            <div class="col-lg-4">
+                <form asp-page-handler="one" method="post">
+                    <button class="btn btn-dark">@Html.DisplayFor(m => m.roomText.linktext1)</button>
+                </form>
+            </div>
+        }
+        @if (Model.roomText.linktext2 != "")
+        {
+            <div class="col-lg-4">
+                <form asp-page-handler="two" method="post">
+                    <button class="btn btn-dark">@Html.DisplayFor(m => m.roomText.linktext2)</button>
+                </form>
+            </div>
+        }
+        @if (Model.roomText.linktext3 != "")
+        {
+            <div class="col-lg-4">
+                <form asp-page-handler="three" method="post">
+                    <button class="btn btn-dark">@Html.DisplayFor(m => m.roomText.linktext3)</button>
+                </form>
+            </div>
+        }
+    </div>
+</div>

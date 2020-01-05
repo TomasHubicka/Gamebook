@@ -11,14 +11,14 @@ namespace Gamebook.Model
         [Key]
         public int Id { get; set; }
         public bool win { get; set; }
-        public bool lose1 { get; set; }
-        public bool lose2 { get; set; }
-        public bool lose3 { get; set; }
-        public bool lose4 { get; set; }
-        public bool lose5 { get; set; }
-        public bool lose6 { get; set; }
-        public bool lose7 { get; set; }
-        public bool lose8 { get; set; }
-        public bool lose9 { get; set; }
+        public bool TurnAround { get; set; }
+        public bool BedroomAdventure { get; set; }
+        public bool FallOut { get; set; }
+        public bool CrowbarsAreHeavy { get; set; }
+        public bool PushingNeverWorks { get; set; }
+        public bool KnifeFight { get; set; }
+        public bool KungFuFight { get; set; }
+        public bool ItsDark { get; set; }
+        public bool DoNothingAndDie { get; set; }
     }
 }

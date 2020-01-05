@@ -12,6 +12,14 @@
     <Compile Remove="Migrations\20200101123738_stuff2.Designer.cs" />
     <Compile Remove="Migrations\20200101124236_morestuff.cs" />
     <Compile Remove="Migrations\20200101124236_morestuff.Designer.cs" />
+    <Compile Remove="Migrations\20200105164512_Text-Beta.cs" />
+    <Compile Remove="Migrations\20200105164512_Text-Beta.Designer.cs" />
+    <Compile Remove="Migrations\20200105173011_re-add-users.cs" />
+    <Compile Remove="Migrations\20200105173011_re-add-users.Designer.cs" />
+    <Compile Remove="Migrations\20200105173305_users.cs" />
+    <Compile Remove="Migrations\20200105173305_users.Designer.cs" />
+    <Compile Remove="Migrations\20200105173746_Init.cs" />
+    <Compile Remove="Migrations\20200105173746_Init.Designer.cs" />
   </ItemGroup>
 
 

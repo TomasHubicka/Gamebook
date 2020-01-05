@@ -18,7 +18,7 @@ namespace Gamebook.Pages
         UserRepository _ur = new UserRepository();
         RoomRepository _rr = new RoomRepository();
         public int room { get; set; } = 0;
-        public List<RoomText> roomTexts { get; set; }
+        public List<RoomTexts> roomTexts { get; set; }
         public List<User> Users = new List<User>();
         public User CurrentUser { get; set; }
         public IndexModel(ILogger<IndexModel> logger, SessionStorage<User> ss)

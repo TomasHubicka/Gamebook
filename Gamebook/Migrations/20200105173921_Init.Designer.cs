@@ -3,14 +3,16 @@ using Gamebook.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gamebook.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200105173921_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,23 +26,23 @@ namespace Gamebook.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("BedroomAdventure");
+                    b.Property<bool>("lose1");
 
-                    b.Property<bool>("CrowbarsAreHeavy");
+                    b.Property<bool>("lose2");
 
-                    b.Property<bool>("DoNothingAndDie");
+                    b.Property<bool>("lose3");
 
-                    b.Property<bool>("FallOut");
+                    b.Property<bool>("lose4");
 
-                    b.Property<bool>("ItsDark");
+                    b.Property<bool>("lose5");
 
-                    b.Property<bool>("KnifeFight");
+                    b.Property<bool>("lose6");
 
-                    b.Property<bool>("KungFuFight");
+                    b.Property<bool>("lose7");
 
-                    b.Property<bool>("PushingNeverWorks");
+                    b.Property<bool>("lose8");
 
-                    b.Property<bool>("TurnAround");
+                    b.Property<bool>("lose9");
 
                     b.Property<bool>("win");
 
@@ -52,15 +54,15 @@ namespace Gamebook.Migrations
                         new
                         {
                             Id = 1,
-                            BedroomAdventure = false,
-                            CrowbarsAreHeavy = false,
-                            DoNothingAndDie = false,
-                            FallOut = false,
-                            ItsDark = false,
-                            KnifeFight = false,
-                            KungFuFight = false,
-                            PushingNeverWorks = false,
-                            TurnAround = false,
+                            lose1 = false,
+                            lose2 = false,
+                            lose3 = false,
+                            lose4 = false,
+                            lose5 = false,
+                            lose6 = false,
+                            lose7 = false,
+                            lose8 = false,
+                            lose9 = false,
                             win = false
                         });
                 });

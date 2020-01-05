@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Gamebook.Model
 {
-    interface IRoomRepository
+    interface IAchievementsRepository
     {
-        RoomTexts GetRoom(int Id);
-        List<RoomTexts> GetAllRooms();
+        Achievements GetAchievement(int Id);
+        List<Achievements> GetAllAchievements();
     }
 }

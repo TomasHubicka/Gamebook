@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Gamebook.Models;
 using Gamebook.Services;
+using Gamebook.Model;
 
 namespace Gamebook
 {
@@ -32,6 +33,9 @@ namespace Gamebook
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<SessionStorage<User>>();
+            services.AddScoped < SessionStorage<GameState>>();
+            services.AddScoped<SessionStorage<int>>();
+            services.AddScoped<SessionStorage<bool>>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

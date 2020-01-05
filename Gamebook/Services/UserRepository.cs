@@ -31,7 +31,6 @@ namespace Gamebook.Services
             User user = _db.users.FirstOrDefault(x => x.Id == userChanges.Id);
             if (user != null)
             {
-                user.achievements = userChanges.achievements;
                 user.sessionId = userChanges.sessionId;
             }
         }

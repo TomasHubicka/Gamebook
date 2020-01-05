@@ -23,7 +23,6 @@ namespace Gamebook.Pages
         }
         public void OnGet()
         {
-            achievements = _ss.LoadOrCreate("_User").achievements;
         }
     }
 }

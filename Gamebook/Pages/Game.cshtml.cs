@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gamebook.Model;
 using Gamebook.Models;
 using Gamebook.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -13,37 +14,48 @@ namespace Gamebook.Pages
     public class GameModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        SessionStorage<User> _ss;
+        SessionStorage<GameState> _ss;
+        SessionStorage<int> _cr;
+        SessionStorage<bool> _w;
         UserRepository _ur = new UserRepository();
         RoomRepository _rr = new RoomRepository();
-        public int room { get; set; } = 0;
-        public List<RoomText> roomTexts { get; set; }
-        public List<User> Users = new List<User>();
+        GameLogic _gl = new GameLogic();
+        public RoomTexts roomText { get; set; } = new RoomTexts();
         public User CurrentUser { get; set; }
-        public GameModel(ILogger<IndexModel> logger, SessionStorage<User> ss)
+        public GameModel(ILogger<IndexModel> logger, SessionStorage<GameState> ss, SessionStorage<int> cr, SessionStorage<bool> w)
         {
             _logger = logger;
             _ss = ss;
+            _cr = cr;
+            _w = w;
         }
         public void OnGet()
         {
-            CurrentUser = _ss.LoadOrCreate("_User");
-            roomTexts = _rr.GetAllRooms();
+            _gl.Start(_ss, _cr, _w);
+            roomText = _rr.GetRoom(_cr.LoadOrCreate("_CurrentRoom"));
+
         }
-        public void OnGetOne()
+        public IActionResult OnPostOne()
         {
-            CurrentUser = _ss.LoadOrCreate("_User");
-            roomTexts = _rr.GetAllRooms();
+            _gl.Run(_ss, _cr, _w, 1);
+            _w.Save("_Waiting", true);
+            roomText = _rr.GetRoom(_cr.LoadOrCreate("_CurrentRoom"));
+            return Page();
+
         }
-        public void OnGetTwo()
+        public IActionResult OnPostTwo()
         {
-            CurrentUser = _ss.LoadOrCreate("_User");
-            roomTexts = _rr.GetAllRooms();
+            _gl.Run(_ss, _cr, _w, 2);
+            _w.Save("_Waiting", true);
+            roomText = _rr.GetRoom(_cr.LoadOrCreate("_CurrentRoom"));
+            return Page();
         }
-        public void OnGetThree()
+        public IActionResult OnPostThree()
         {
-            CurrentUser = _ss.LoadOrCreate("_User");
-            roomTexts = _rr.GetAllRooms();
+            _gl.Run(_ss, _cr, _w, 3);
+            _w.Save("_Waiting", true);
+            roomText = _rr.GetRoom(_cr.LoadOrCreate("_CurrentRoom"));
+            return Page();
         }
     }
 }
