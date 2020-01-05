@@ -15,6 +15,7 @@ namespace Gamebook.Pages
     {
         private readonly ILogger<achievementsModel> _logger;
         SessionStorage<User> _ss;
+        AchievementsRepository _ar = new AchievementsRepository();
         public Achievements achievements;
         public achievementsModel(ILogger<achievementsModel> logger, SessionStorage<User> ss)
         {
@@ -23,6 +24,7 @@ namespace Gamebook.Pages
         }
         public void OnGet()
         {
+            achievements = _ar.GetAchievement(_ss.LoadOrCreate("_User").Id);
         }
     }
 }

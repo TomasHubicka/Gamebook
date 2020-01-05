@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Gamebook.Services;
 using Microsoft.Extensions.Logging;
+using Gamebook.Model;
 
 namespace Gamebook.Pages
 {
@@ -17,9 +18,12 @@ namespace Gamebook.Pages
         private readonly ILogger<loginModel> _logger;
         SessionStorage<User> _ss;
         UserLogin _ul = new UserLogin();
+        AchievementsRepository _ar = new AchievementsRepository();
+        ApplicationDBContext _db = new ApplicationDBContext();
         [BindProperty]
         public User user { get; set; }
         public int Error { get; set; }
+        public Achievements achievements { get; set; } = new Achievements();
         public loginModel(ILogger<loginModel> logger, SessionStorage<User> ss)
         {
             _logger = logger;
@@ -30,10 +34,16 @@ namespace Gamebook.Pages
         }
 
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (_ul.login(_ss, user) == true)
             {
+                if(_ar.GetAchievement(_ss.LoadOrCreate("_User").Id) == null)
+                {
+                    achievements.UserId = _ss.LoadOrCreate("_User").Id;
+                    _ar.Add(_db, achievements);
+                }
+                await _db.SaveChangesAsync();
                 return RedirectToPage("./index");
             }
             else

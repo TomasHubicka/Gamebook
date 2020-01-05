@@ -17,6 +17,5 @@ namespace Gamebook.Models
         [Required]
         [Display(Name ="password")]
         public string password { get; set; }
-        public int sessionId { get; set; }
     }
 }

@@ -17,17 +17,19 @@ namespace Gamebook.Pages
         SessionStorage<GameState> _ss;
         SessionStorage<int> _cr;
         SessionStorage<bool> _w;
+        SessionStorage<User> _u;
         UserRepository _ur = new UserRepository();
         RoomRepository _rr = new RoomRepository();
         GameLogic _gl = new GameLogic();
         public RoomTexts roomText { get; set; } = new RoomTexts();
         public User CurrentUser { get; set; }
-        public GameModel(ILogger<IndexModel> logger, SessionStorage<GameState> ss, SessionStorage<int> cr, SessionStorage<bool> w)
+        public GameModel(ILogger<IndexModel> logger, SessionStorage<GameState> ss, SessionStorage<int> cr, SessionStorage<bool> w, SessionStorage<User> u)
         {
             _logger = logger;
             _ss = ss;
             _cr = cr;
             _w = w;
+            _u = u;
         }
         public void OnGet()
         {
@@ -37,7 +39,7 @@ namespace Gamebook.Pages
         }
         public IActionResult OnPostOne()
         {
-            _gl.Run(_ss, _cr, _w, 1);
+            _gl.Run(_ss, _cr, _w, _u, 1);
             _w.Save("_Waiting", true);
             roomText = _rr.GetRoom(_cr.LoadOrCreate("_CurrentRoom"));
             return Page();
@@ -45,14 +47,14 @@ namespace Gamebook.Pages
         }
         public IActionResult OnPostTwo()
         {
-            _gl.Run(_ss, _cr, _w, 2);
+            _gl.Run(_ss, _cr, _w, _u, 2);
             _w.Save("_Waiting", true);
             roomText = _rr.GetRoom(_cr.LoadOrCreate("_CurrentRoom"));
             return Page();
         }
         public IActionResult OnPostThree()
         {
-            _gl.Run(_ss, _cr, _w, 3);
+            _gl.Run(_ss, _cr, _w, _u, 3);
             _w.Save("_Waiting", true);
             roomText = _rr.GetRoom(_cr.LoadOrCreate("_CurrentRoom"));
             return Page();

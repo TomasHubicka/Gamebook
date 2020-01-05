@@ -1,4 +1,5 @@
-﻿using Gamebook.Models;
+﻿using Gamebook.Model;
+using Gamebook.Models;
 using Gamebook.Pages;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -11,8 +12,10 @@ namespace Gamebook.Services
 {
     public class UserLogin
     {
+
         UserRepository _ur = new UserRepository();
         List<User> Users = new List<User>();
+        Achievements achievements { get; set; } = new Achievements();
         public bool login(SessionStorage<User> _ss, User user)
         {
             Users = _ur.GetAllUsers();

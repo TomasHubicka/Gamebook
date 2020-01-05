@@ -10,6 +10,7 @@ namespace Gamebook.Model
     {
         [Key]
         public int Id { get; set; }
+        public int UserId { get; set; }
         public bool win { get; set; }
         public bool TurnAround { get; set; }
         public bool BedroomAdventure { get; set; }

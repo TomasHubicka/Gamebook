@@ -5,11 +5,84 @@
 }
 
 <h1>achievements</h1>
-@if (Model.achievements.win) 
+@if (Model.achievements.win)
 {
-    <p>Win: True</p>
+    <p>Win: Completed</p>
 }
 else
 {
-    <p>Win: False</p>
+    <p>Win: Not Completed</p>
 }
+@if (Model.achievements.TurnAround)
+{
+    <p>Turn Around: Completed</p>
+}
+else
+{
+    <p>Turn Around: Not Completed</p>
+}
+@if (Model.achievements.BedroomAdventure)
+{
+    <p>Bedroom Adventure: Completed</p>
+}
+else
+{
+    <p>Bedroom Adventure: Not Completed</p>
+}
+@if (Model.achievements.FallOut)
+{
+    <p>FallOut: Completed</p>
+}
+else
+{
+    <p>FallOut: Not Completed</p>
+}
+@if (Model.achievements.CrowbarsAreHeavy)
+{
+    <p>Crowbars Are Heavy: Completed</p>
+}
+else
+{
+    <p>Crowbars Are Heavy: Not Completed</p>
+}
+@if (Model.achievements.PushingNeverWorks)
+{
+    <p>Pushing Never Works: Completed</p>
+}
+else
+{
+    <p>Pushing Never Works: Not Completed</p>
+}
+@if (Model.achievements.KnifeFight)
+{
+    <p>Knife Fight: Completed</p>
+}
+else
+{
+    <p>Knife Fight: Not Completed</p>
+}
+@if (Model.achievements.KungFuFight)
+{
+    <p>Kung-Fu Fight: Completed</p>
+}
+else
+{
+    <p>Kung-Fu Fight: Not Completed</p>
+}
+@if (Model.achievements.ItsDark)
+{
+    <p>It's Dark: Completed</p>
+}
+else
+{
+    <p>It's Dark: Not Completed</p>
+}
+@if (Model.achievements.DoNothingAndDie)
+{
+    <p>Do Nothing And Die: Completed</p>
+}
+else
+{
+    <p>Do Nothing And Die: Not Completed</p>
+}
+<a asp-page="./index" class="btn btn-dark">Back</a>

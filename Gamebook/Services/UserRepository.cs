@@ -11,9 +11,9 @@ namespace Gamebook.Services
     {
         ApplicationDBContext _db = new ApplicationDBContext();
         List<User> Users { get; set; }
-        public void Add(User user)
+        public void Add(ApplicationDBContext db,  User user)
         {
-            _db.users.Add(user);
+            db.users.Add(user);       
         }
 
         public List<User> GetAllUsers()
@@ -24,15 +24,6 @@ namespace Gamebook.Services
         public User GetUser(int Id)
         {
             return _db.users.FirstOrDefault(x => x.Id == Id);
-        }
-
-        public void Update(User userChanges)
-        {
-            User user = _db.users.FirstOrDefault(x => x.Id == userChanges.Id);
-            if (user != null)
-            {
-                user.sessionId = userChanges.sessionId;
-            }
         }
     }
 }

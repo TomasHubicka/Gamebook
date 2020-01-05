@@ -9,6 +9,7 @@ namespace Gamebook.Services
 {
     public class GameLogic
     {
+        AchievementsRepository _ar = new AchievementsRepository();
         public bool Start(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w)
         {
             GameState empty = new GameState();
@@ -29,16 +30,19 @@ namespace Gamebook.Services
             _w.Save("_Waiting", false);
             return true;
         }
-        public void Run(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, int Choice)
+        public void Run(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, SessionStorage<User> _u, int Choice)
         {
-            Game(_ss, _cr, _w, Choice);
+            Game(_ss, _cr, _w, _u, Choice);
         }
-        public void Game(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, int Choice)
+        public void Game(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, SessionStorage<User> _u, int Choice)
         {
             if(_ss.LoadOrCreate("_Game").Start == 1)
             {
                 //turn around and leave - end
                 _cr.Save("_CurrentRoom", 2);
+                Achievements achievements = _ar.GetAchievement(_u.LoadOrCreate("_User").Id);
+                achievements.TurnAround = true;
+                _ar.Update(achievements);
             }
             else if (_ss.LoadOrCreate("_Game").Start == 2)
             {
@@ -51,13 +55,13 @@ namespace Gamebook.Services
                     Game.CrowbarInv = true;
                     _ss.Save("_Game", Game);
                     _cr.Save("_CurrentRoom", 4);
-                    Game2(_ss, _cr, _w, Choice);
+                    Game2(_ss, _cr, _w, _u, Choice);
                 }
                 else if(_ss.LoadOrCreate("_Game").CrowbarYN == 2)
                 {
                     //leave crowbar
                     _cr.Save("_CurrentRoom", 5);
-                    Game2(_ss, _cr, _w, Choice);
+                    Game2(_ss, _cr, _w, _u, Choice);
                 }
                 else if (_w.LoadOrCreate("_Waiting") == true)
                 {
@@ -65,7 +69,7 @@ namespace Gamebook.Services
                     Game.CrowbarYN = Choice;
                     _ss.Save("_Game", Game);
                     _w.Save("_Waiting", false);
-                    Run(_ss, _cr, _w, Choice);
+                    Run(_ss, _cr, _w, _u, Choice);
                 }
             }
             else if (_ss.LoadOrCreate("_Game").Start == 3)
@@ -83,13 +87,13 @@ namespace Gamebook.Services
                         Game.KnifeInv = true;
                         _ss.Save("_Game", Game);
                         _cr.Save("_CurrentRoom", 8);
-                        Game2(_ss, _cr, _w, Choice);
+                        Game2(_ss, _cr, _w, _u, Choice);
                     }
                     else if (_ss.LoadOrCreate("_Game").KnifeYN == 2)
                     {
                         //leave knife
                         _cr.Save("_CurrentRoom", 9);
-                        Game2(_ss, _cr, _w, Choice);
+                        Game2(_ss, _cr, _w, _u, Choice);
                     }
                     else if(_w.LoadOrCreate("_Waiting") == true)
                     {
@@ -97,7 +101,7 @@ namespace Gamebook.Services
                         Game.KnifeYN = Choice;
                         _ss.Save("_Game", Game);
                         _w.Save("_Waiting", false);
-                        Run(_ss, _cr, _w, Choice);
+                        Run(_ss, _cr, _w, _u, Choice);
                     }
 
                 }
@@ -105,7 +109,7 @@ namespace Gamebook.Services
                 {
                     //Hall 2
                     _cr.Save("_CurrentRoom", 6);
-                    Game2(_ss, _cr, _w, Choice);
+                    Game2(_ss, _cr, _w, _u, Choice);
                 }
                 else if (_w.LoadOrCreate("_Waiting") == true)
                 {
@@ -113,7 +117,7 @@ namespace Gamebook.Services
                     Game.KitchenHall2 = Choice;
                     _ss.Save("_Game", Game);
                     _w.Save("_Waiting", false);
-                    Run(_ss, _cr, _w, Choice);
+                    Run(_ss, _cr, _w, _u, Choice);
                 }
             }
             else if (_w.LoadOrCreate("_Waiting") == true)
@@ -122,15 +126,18 @@ namespace Gamebook.Services
                 Game.Start = Choice;
                 _ss.Save("_Game", Game);
                 _w.Save("_Waiting", false);
-                Run(_ss, _cr, _w, Choice);
+                Run(_ss, _cr, _w, _u, Choice);
             }
         }
-        public void Game2(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, int Choice)
+        public void Game2(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, SessionStorage<User> _u, int Choice)
         {
             if (_ss.LoadOrCreate("_Game").BedroomHall3 == 1)
             {
                 //Bedroom - end
                 _cr.Save("_CurrentRoom", 11);
+                Achievements achievements = _ar.GetAchievement(_u.LoadOrCreate("_User").Id);
+                achievements.BedroomAdventure = true;
+                _ar.Update(achievements);
             }
             else if (_ss.LoadOrCreate("_Game").BedroomHall3 == 2)
             {
@@ -148,7 +155,7 @@ namespace Gamebook.Services
                             Game.FlashlightInv = true;
                             _ss.Save("_Game", Game);
                             _cr.Save("_CurrentRoom", 14);
-                            Game3(_ss, _cr, _w, Choice);
+                            Game3(_ss, _cr, _w, _u, Choice);
                         }
                         else if (_ss.LoadOrCreate("_Game").KeepCrowbarYN == 2)
                         {
@@ -158,7 +165,7 @@ namespace Gamebook.Services
                             Game.FlashlightInv = true;
                             _ss.Save("_Game", Game);
                             _cr.Save("_CurrentRoom", 15);
-                            Game3(_ss, _cr, _w, Choice);
+                            Game3(_ss, _cr, _w, _u, Choice);
                         }
                         else if (_w.LoadOrCreate("_Waiting") == true)
                         {
@@ -166,7 +173,7 @@ namespace Gamebook.Services
                             Game.KeepCrowbarYN = Choice;
                             _ss.Save("_Game", Game);
                             _w.Save("_Waiting", false);
-                            Run(_ss, _cr, _w, Choice);
+                            Run(_ss, _cr, _w, _u, Choice);
                         }
                     }
                     else if (_ss.LoadOrCreate("_Game").CrowbarInv == false)
@@ -176,20 +183,23 @@ namespace Gamebook.Services
                         GameState Game = _ss.LoadOrCreate("_Game");
                         Game.LivingRoomBasementWindow = 2;
                         _ss.Save("_Game", Game);
-                        Game3(_ss, _cr, _w, Choice);
+                        Game3(_ss, _cr, _w, _u, Choice);
                     }
                 }
                 else if (_ss.LoadOrCreate("_Game").LivingRoomBasementWindow == 2)
                 {
                     //Basement
                     _cr.Save("_CurrentRoom", 17);
-                    Game3(_ss, _cr, _w, Choice);
+                    Game3(_ss, _cr, _w, _u, Choice);
 
                 }
                 else if (_ss.LoadOrCreate("_Game").LivingRoomBasementWindow == 3)
                 {
                     //Window - end
                     _cr.Save("_CurrentRoom", 18);
+                    Achievements achievements = _ar.GetAchievement(_u.LoadOrCreate("_User").Id);
+                    achievements.FallOut = true;
+                    _ar.Update(achievements);
                 }
                 else if (_w.LoadOrCreate("_Waiting") == true)
                 {
@@ -197,7 +207,7 @@ namespace Gamebook.Services
                     Game.LivingRoomBasementWindow = Choice;
                     _ss.Save("_Game", Game);
                     _w.Save("_Waiting", false);
-                    Run(_ss, _cr, _w, Choice);
+                    Run(_ss, _cr, _w, _u, Choice);
                 }
             }
             else if (_w.LoadOrCreate("_Waiting") == true)
@@ -206,10 +216,10 @@ namespace Gamebook.Services
                 Game.BedroomHall3 = Choice;
                 _ss.Save("_Game", Game);
                 _w.Save("_Waiting", false);
-                Run(_ss, _cr, _w, Choice);
+                Run(_ss, _cr, _w, _u, Choice);
             }
         }
-        public void Game3(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, int Choice)
+        public void Game3(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, SessionStorage<User> _u, int Choice)
         {
             if (_ss.LoadOrCreate("_Game").FlashlightInv == true)
             {
@@ -222,6 +232,9 @@ namespace Gamebook.Services
                     {
                         //has crowbar - end
                         _cr.Save("_CurrentRoom", 20);
+                        Achievements achievements = _ar.GetAchievement(_u.LoadOrCreate("_User").Id);
+                        achievements.CrowbarsAreHeavy = true;
+                        _ar.Update(achievements);
                     }
                     else if(_ss.LoadOrCreate("_Game").CrowbarInv == false)
                     {
@@ -231,11 +244,17 @@ namespace Gamebook.Services
                         {
                             //push - end
                             _cr.Save("_CurrentRoom", 22);
+                            Achievements achievements = _ar.GetAchievement(_u.LoadOrCreate("_User").Id);
+                            achievements.PushingNeverWorks = true;
+                            _ar.Update(achievements);
                         }
                         else if(_ss.LoadOrCreate("_Game").PushPull == 2)
                         {
                             //pull - win
                             _cr.Save("_CurrentRoom", 23);
+                            Achievements achievements = _ar.GetAchievement(_u.LoadOrCreate("_User").Id);
+                            achievements.win = true;
+                            _ar.Update(achievements);
                         }
                         else if (_w.LoadOrCreate("_Waiting") == true)
                         {
@@ -243,7 +262,7 @@ namespace Gamebook.Services
                             Game.PushPull = Choice;
                             _ss.Save("_Game", Game);
                             _w.Save("_Waiting", false);
-                            Run(_ss, _cr, _w, Choice);
+                            Run(_ss, _cr, _w, _u, Choice);
                         }
                     }
                 }
@@ -254,11 +273,17 @@ namespace Gamebook.Services
                     {
                         //has knife - end
                         _cr.Save("_CurrentRoom", 24);
+                        Achievements achievements = _ar.GetAchievement(_u.LoadOrCreate("_User").Id);
+                        achievements.KnifeFight = true;
+                        _ar.Update(achievements);
                     }
                     else if (_ss.LoadOrCreate("_Game").KnifeInv == false)
                     {
                         //doesn't have knife - end
                         _cr.Save("_CurrentRoom", 25);
+                        Achievements achievements = _ar.GetAchievement(_u.LoadOrCreate("_User").Id);
+                        achievements.KungFuFight = true;
+                        _ar.Update(achievements);
                     }
                 }
                 else if (_w.LoadOrCreate("_Waiting") == true)
@@ -267,13 +292,22 @@ namespace Gamebook.Services
                     Game.RunFight = Choice;
                     _ss.Save("_Game", Game);
                     _w.Save("_Waiting", false);
-                    Run(_ss, _cr, _w, Choice);
+                    Run(_ss, _cr, _w, _u, Choice);
                 }
             }
             else if (_ss.LoadOrCreate("_Game").FlashlightInv == false)
             {
                 //doesn't have flashlight - end
                 _cr.Save("_CurrentRoom", 26);
+                if(_ss.LoadOrCreate("_Game").Start == 3 && _ss.LoadOrCreate("_Game").KitchenHall2 == 2 && _ss.LoadOrCreate("_Game").BedroomHall3 == 2 && _ss.LoadOrCreate("_Game").LivingRoomBasementWindow == 2)
+                {
+                    Achievements achievement = _ar.GetAchievement(_u.LoadOrCreate("_User").Id);
+                    achievement.DoNothingAndDie = true;
+                    _ar.Update(achievement);
+                }
+                Achievements achievements = _ar.GetAchievement(_u.LoadOrCreate("_User").Id);
+                achievements.ItsDark = true;
+                _ar.Update(achievements);
             }
         }
     }

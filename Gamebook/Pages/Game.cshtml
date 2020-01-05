@@ -36,3 +36,9 @@
         }
     </div>
 </div>
+@if (Model.roomText.linktext1 == "" && Model.roomText.linktext2 == "" && Model.roomText.linktext2 == "")
+{
+    <a asp-page="./index" class="btn btn-dark">Back to Menu</a>
+    <a asp-page="./Game" class="btn btn-dark">Restart</a>
+    <a asp-page="./achievements" class="btn btn-dark">Achievements</a>
+}
