@@ -20,5 +20,6 @@ namespace Gamebook.Model
         public bool CrowbarInv { get; set; }
         public bool KnifeInv { get; set; }
         public bool FlashlightInv { get; set; }
+        public bool EnteredBasement { get; set; }
     }
 }

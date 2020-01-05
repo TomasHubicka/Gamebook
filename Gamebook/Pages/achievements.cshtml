@@ -3,86 +3,190 @@
 @{
     ViewData["Title"] = "achievements";
 }
+    <div class="text-center">
+        <h1>achievements</h1>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <p>Win:</p>
+            </div>
+            @if (Model.achievements.win)
+            {
+                <div class="col-lg-6">
+                    <p>Completed</p>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-6">
+                    <p>Not Completed</p>
+                </div>
+            }
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <p>Turn Around:</p>
+            </div>
+            @if (Model.achievements.TurnAround)
+            {
+                <div class="col-lg-6">
+                    <p>Completed </p>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-6">
+                    <p>Not Completed</p>
+                </div>
+            }
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <p>Bedroom Adventure: </p>
+            </div>
+            @if (Model.achievements.BedroomAdventure)
+            {
+                <div class="col-lg-6">
+                    <p>Completed</p>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-6">
+                    <p>Not Completed</p>
+                </div>
+            }
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <p>FallOut: </p>
+            </div>
+            @if (Model.achievements.FallOut)
+            {
+                <div class="col-lg-6">
+                    <p>Completed</p>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-6">
+                    <p>Not Completed</p>
+                </div>
+            }
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <p>Crowbars Are Heavy: </p>
+            </div>
+            @if (Model.achievements.CrowbarsAreHeavy)
+            {
+                <div class="col-lg-6">
+                    <p>Completed</p>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-6">
+                    <p>Not Completed</p>
+                </div>
+            }
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <p>Pushing Never Works: </p>
+            </div>
+            @if (Model.achievements.PushingNeverWorks)
+            {
+                <div class="col-lg-6">
+                    <p>Completed</p>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-6">
+                    <p>Not Completed</p>
+                </div>
+            }
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <p>Knife Fight: </p>
+            </div>
+            @if (Model.achievements.KnifeFight)
+            {
+                <div class="col-lg-6">
+                    <p>Completed</p>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-6">
+                    <p>Not Completed</p>
+                </div>
+            }
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <p>Kung-Fu Fight: </p>
+            </div>
+            @if (Model.achievements.KungFuFight)
+            {
+                <div class="col-lg-6">
+                    <p>Completed</p>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-6">
+                    <p>Not Completed</p>
+                </div>
+            }
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <p>It's Dark: </p>
+            </div>
+            @if (Model.achievements.ItsDark)
+            {
+                <div class="col-lg-6">
+                    <p>Completed</p>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-6">
+                    <p>Not Completed</p>
+                </div>
+            }
 
-<h1>achievements</h1>
-@if (Model.achievements.win)
-{
-    <p>Win: Completed</p>
-}
-else
-{
-    <p>Win: Not Completed</p>
-}
-@if (Model.achievements.TurnAround)
-{
-    <p>Turn Around: Completed</p>
-}
-else
-{
-    <p>Turn Around: Not Completed</p>
-}
-@if (Model.achievements.BedroomAdventure)
-{
-    <p>Bedroom Adventure: Completed</p>
-}
-else
-{
-    <p>Bedroom Adventure: Not Completed</p>
-}
-@if (Model.achievements.FallOut)
-{
-    <p>FallOut: Completed</p>
-}
-else
-{
-    <p>FallOut: Not Completed</p>
-}
-@if (Model.achievements.CrowbarsAreHeavy)
-{
-    <p>Crowbars Are Heavy: Completed</p>
-}
-else
-{
-    <p>Crowbars Are Heavy: Not Completed</p>
-}
-@if (Model.achievements.PushingNeverWorks)
-{
-    <p>Pushing Never Works: Completed</p>
-}
-else
-{
-    <p>Pushing Never Works: Not Completed</p>
-}
-@if (Model.achievements.KnifeFight)
-{
-    <p>Knife Fight: Completed</p>
-}
-else
-{
-    <p>Knife Fight: Not Completed</p>
-}
-@if (Model.achievements.KungFuFight)
-{
-    <p>Kung-Fu Fight: Completed</p>
-}
-else
-{
-    <p>Kung-Fu Fight: Not Completed</p>
-}
-@if (Model.achievements.ItsDark)
-{
-    <p>It's Dark: Completed</p>
-}
-else
-{
-    <p>It's Dark: Not Completed</p>
-}
-@if (Model.achievements.DoNothingAndDie)
-{
-    <p>Do Nothing And Die: Completed</p>
-}
-else
-{
-    <p>Do Nothing And Die: Not Completed</p>
-}
-<a asp-page="./index" class="btn btn-dark">Back</a>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <p>Do Nothing And Die: </p>
+            </div>
+            @if (Model.achievements.DoNothingAndDie)
+            {
+                <div class="col-lg-6">
+                    <p>Completed</p>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-6">
+                    <p>Not Completed</p>
+                </div>
+            }
+        </div>
+        <hr />
+    </div>
+
+        <a asp-page="./index" class="btn btn-dark">Back</a>

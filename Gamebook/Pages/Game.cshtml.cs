@@ -14,8 +14,8 @@ namespace Gamebook.Pages
     public class GameModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        SessionStorage<GameState> _ss;
-        SessionStorage<int> _cr;
+        public SessionStorage<GameState> _ss;
+        public SessionStorage<int> _cr;
         SessionStorage<bool> _w;
         SessionStorage<User> _u;
         UserRepository _ur = new UserRepository();
@@ -35,6 +35,17 @@ namespace Gamebook.Pages
         {
             _gl.Start(_ss, _cr, _w);
             roomText = _rr.GetRoom(_cr.LoadOrCreate("_CurrentRoom"));
+
+        }
+        public IActionResult OnPostBasement()
+        {
+            GameState game = _ss.LoadOrCreate("_Game");
+            game.EnteredBasement = true;
+            _ss.Save("_Game", game);
+            _gl.Run(_ss, _cr, _w, _u, 0);
+            _w.Save("_Waiting", true);
+            roomText = _rr.GetRoom(_cr.LoadOrCreate("_CurrentRoom"));
+            return Page();
 
         }
         public IActionResult OnPostOne()
