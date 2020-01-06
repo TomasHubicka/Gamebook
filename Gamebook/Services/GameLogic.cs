@@ -28,7 +28,7 @@ namespace Gamebook.Services
             empty.EnteredBasement = false;
             _ss.Save("_Game", empty);
             _cr.Save("_CurrentRoom", 1);
-            _w.Save("_Waiting", false);
+            _w.Save("_Waiting", true);
             return true;
         }
         public void Run(SessionStorage<GameState> _ss, SessionStorage<int> _cr, SessionStorage<bool> _w, SessionStorage<User> _u, int Choice)

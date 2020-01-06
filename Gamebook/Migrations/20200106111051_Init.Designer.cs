@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gamebook.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20200105212555_finished-texts")]
-    partial class finishedtexts
+    [Migration("20200106111051_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
